@@ -1,0 +1,10 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/.idea.Fluppy-Comet-Re.iml
+/modules.xml
+/projectSettingsUpdater.xml
+/contentModel.xml
+# Editor-based HTTP Client requests
+/httpRequests/
