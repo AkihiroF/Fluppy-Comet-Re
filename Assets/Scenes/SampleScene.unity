@@ -1725,6 +1725,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8846116537788164606, guid: b298a9134313346328320310a93f8868, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8846116537788164606, guid: b298a9134313346328320310a93f8868, type: 3}
       propertyPath: SizePart.y
       value: 0
       objectReference: {fileID: 0}

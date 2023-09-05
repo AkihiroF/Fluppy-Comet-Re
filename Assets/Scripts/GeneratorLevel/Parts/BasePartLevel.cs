@@ -16,7 +16,7 @@ namespace GeneratorLevel.Parts
             {
                 var endPos = obstacle.position + new Vector3(0, Random.Range(-3, 3));
                 var moveDuration = Random.Range(1, 5);
-                obstacle.DOMove(endPos, moveDuration)
+                obstacle.DOLocalMove(endPos, moveDuration)
                     .SetEase(Ease.InOutSine) // Тип сглаживания
                     .SetLoops(-1, LoopType.Yoyo);
             }

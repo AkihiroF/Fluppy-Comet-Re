@@ -34,6 +34,7 @@ namespace GeneratorLevel
         {
             for (int i = 0; i < startLenght; i++)
             {
+                
                 var part = _pool.GetPartLevel(typeof(BasePartLevel));
                 part.transform.position = _positionSpawn;
                 _positionSpawn += part.GetDistance;
