@@ -1,19 +1,14 @@
-using Input;
-using Player;
 using UnityEngine;
+using Zenject;
 
 namespace Core
 {
     public class Bootstrapper : MonoBehaviour
     {
-        [SerializeField] private PlayerMovementComponent movementComponent;
+        [Inject] private Game _game;
         private void Awake()
         {
-            var input = new PlayerInput();
-            var inputHandler = new InputHandler(movementComponent);
-            var game = new Game(input, inputHandler);
-            
-            game.StartGame();
+            _game.StartGame();
         }
     }
 }

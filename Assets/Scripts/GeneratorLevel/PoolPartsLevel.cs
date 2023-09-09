@@ -1,62 +1,56 @@
 using System;
 using System.Collections.Generic;
-using GeneratorLevel;
 using GeneratorLevel.Parts;
 using UnityEngine;
+using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
-namespace _Source.GenerationLevel
+namespace GeneratorLevel
 {
     public class PoolPartsLevel
     {
-        private Dictionary<Type, List<APartLevel>> _parts;
-        private int _countBaseParts;
+        private List<APartLevel> _parts;
 
-        public PoolPartsLevel(int countBaseParts)
+        public PoolPartsLevel()
         {
-            _parts = new Dictionary<Type, List<APartLevel>>();
-            _countBaseParts = countBaseParts;
+            _parts = new List<APartLevel>();
         }
 
-        public APartLevel GetPartLevel(Type type)
+        public APartLevel GetPartLevel()
         {
-            
             try
             {
-                if (_parts[type].Count > _countBaseParts)
+                if (_parts.Count > 1)
                 {
-                    var part =_parts[type][Random.Range(_countBaseParts,_parts[type].Count)];
-                    _parts[type].Remove(part);
+                    int randomIndex = Random.Range(1, _parts.Count);
+                    APartLevel part = _parts[randomIndex];
+                    _parts.Remove(part);
                     return part;
                 }
-                var newPart =CreatorPartsLevel.CreatePart(_parts[type][Random.Range(0, _parts[type].Count)].GetObject).GetComponent<APartLevel>();
-                newPart.SetParameters(this);
-                return newPart;
+                else if (_parts.Count == 1)
+                {
+                    // Создаем новый экземпляр, если в пуле только один элемент
+                    APartLevel newPart = Object.Instantiate(_parts[0].GetObject).GetComponent<APartLevel>();
+                    return newPart;
+                }
+                else
+                {
+                    // Возвращаем null или выбрасываем исключение, если пул пуст
+                    Debug.LogError("Pool is empty");
+                    return null;
+                }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                Console.WriteLine(e);
+                Debug.LogError(e);
                 throw;
             }
         }
 
-        public void AddToPool(Type type, APartLevel objectPart)
+
+        public void AddToPool(APartLevel objectPart)
         {
-            try
-            {
-                _parts[type].Add(objectPart);
-            }
-            catch
-            {
-                try
-                {
-                    _parts.Add(type, new List<APartLevel>(){objectPart});
-                }
-                catch 
-                {
-                    Debug.Log("Nu ti i debil");
-                }
-            }
+            _parts.Add(objectPart);
         }
     }
 }

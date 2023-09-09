@@ -9,7 +9,7 @@ namespace Player
         [SerializeField] private float velocityForce;
         [SerializeField] private Vector2 maxVelocity;
         private Rigidbody2D _rb;
-        private Vector2 _vectorUp;
+        private Vector2 _vectorUp = Vector2.zero;
 
         private void Start()
         {
@@ -18,18 +18,24 @@ namespace Player
 
         public void OnJump(bool isActive)
         {
-            _vectorUp = isActive ? Vector2.up * velocityForce : Vector2.zero;
+            if (isActive)
+            {
+                _vectorUp = Vector2.up * velocityForce;
+            }
+            else
+            {
+                _vectorUp = Vector2.zero;
+            }
         }
 
         private void FixedUpdate()
         {
-            var vectorMoving = Vector2.right * speedMovement + _vectorUp;
+            Vector2 vectorMoving = Vector2.right * speedMovement + _vectorUp;
             _rb.AddForce(vectorMoving);
-            var currentVelocity = _rb.velocity;
-            if (_rb.velocity.x > maxVelocity.x)
-                currentVelocity.x = maxVelocity.x;
-            if (_rb.velocity.y > maxVelocity.y)
-                currentVelocity.y = maxVelocity.y;
+
+            Vector2 currentVelocity = _rb.velocity;
+            currentVelocity.x = Mathf.Clamp(currentVelocity.x, -maxVelocity.x, maxVelocity.x);
+            currentVelocity.y = Mathf.Clamp(currentVelocity.y, -maxVelocity.y, maxVelocity.y);
 
             _rb.velocity = currentVelocity;
         }

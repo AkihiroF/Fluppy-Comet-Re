@@ -5,66 +5,88 @@ using Input;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using Zenject;
 
 namespace Core
 {
     public class Game
     {
-        private PlayerInput _input;
-        private InputHandler _inputHandler;
-        private bool _isPlay;
+        private readonly PlayerInput _input;
+        private readonly InputHandler _inputHandler;
+        private bool _isGameStarted;
+
+        [Inject]
         public Game(PlayerInput input, InputHandler inputHandler)
         {
             _input = input;
             _inputHandler = inputHandler;
-            Time.timeScale = 0;
-            _isPlay = false;
+            InitializeGame();
         }
 
-        private void Bind()
+        private void InitializeGame()
+        {
+            PauseGame();
+            _isGameStarted = false;
+        }
+
+        private void PauseGame()
+        {
+            Time.timeScale = 0;
+        }
+
+        private void ResumeGame()
+        {
+            Time.timeScale = 1;
+        }
+
+        private void BindInputActions()
         {
             _input.Player.Jump.performed += _inputHandler.InputJump;
-            _input.Player.Jump.performed += OnStartGame;
+            _input.Player.Jump.performed += StartGameOnFirstJump;
         }
 
-        private void ActivateInput()
+        private void EnableInput()
         {
             _input.Player.Enable();
         }
 
-        private void OnStartGame(InputAction.CallbackContext obj)
+        private void StartGameOnFirstJump(InputAction.CallbackContext context)
         {
-            if(_isPlay)
+            if (_isGameStarted)
                 return;
-            _isPlay = true;
-            Time.timeScale = 1;
+
+            _isGameStarted = true;
+            ResumeGame();
             Signals.Get<OnStartGame>().Dispatch();
         }
 
-        private void Subscribe()
+        private void SubscribeToEvents()
         {
-            Signals.Get<OnDie>().AddListener(Die);
+            Signals.Get<OnDie>().AddListener(OnPlayerDie);
         }
 
-        private void Unsubscribe()
+        private void UnsubscribeFromEvents()
         {
-            Signals.Get<OnDie>().RemoveListener(Die);
+            Signals.Get<OnDie>().RemoveListener(OnPlayerDie);
         }
 
-        private void Die()
+        private void OnPlayerDie()
         {
             DOTween.KillAll();
-            Unsubscribe();
+            UnsubscribeFromEvents();
+            ReloadCurrentScene();
+        }
+
+        private void ReloadCurrentScene()
+        {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         public void StartGame()
         {
-            Bind();
-            ActivateInput();
-            Subscribe();
+            BindInputActions();
+            EnableInput();
+            SubscribeToEvents();
         }
-        
-        
     }
 }

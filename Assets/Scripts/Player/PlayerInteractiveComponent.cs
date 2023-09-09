@@ -1,26 +1,59 @@
-using System;
 using deVoid.Utils;
 using Events;
 using Services;
 using UnityEngine;
+using Zenject;
 
 namespace Player
 {
     public class PlayerInteractiveComponent : MonoBehaviour
     {
-        [SerializeField] private LayerMask layerCoin;
-        [SerializeField] private LayerMask layerDie;
+        [SerializeField] private LayerMask coinLayer;
+        [SerializeField] private LayerMask deathLayer;
+
+        [Inject] private ScoreDataBase _scoreDataBase;
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            var obj = other.gameObject;
-            if(layerCoin.CheckLayer(obj.layer))
+            HandleCoinCollision(other);
+            HandleDeathCollision(other);
+        }
+
+        private void HandleCoinCollision(Collider2D other)
+        {
+            if (IsCoinLayer(other.gameObject.layer))
             {
-                Signals.Get<OnGetCoin>().Dispatch();
-                obj.SetActive(false);
+                CollectCoin(other.gameObject);
             }
-            if(layerDie.CheckLayer(obj.layer))
-                Signals.Get<OnDie>().Dispatch();
+        }
+
+        private void HandleDeathCollision(Collider2D other)
+        {
+            if (IsDeathLayer(other.gameObject.layer))
+            {
+                TriggerDeath();
+            }
+        }
+
+        private bool IsCoinLayer(int layer)
+        {
+            return coinLayer.CheckLayer(layer);
+        }
+
+        private bool IsDeathLayer(int layer)
+        {
+            return deathLayer.CheckLayer(layer);
+        }
+
+        private void CollectCoin(GameObject coin)
+        {
+            _scoreDataBase.AddCoin();
+            coin.SetActive(false);
+        }
+
+        private void TriggerDeath()
+        {
+            Signals.Get<OnDie>().Dispatch();
         }
     }
 }
