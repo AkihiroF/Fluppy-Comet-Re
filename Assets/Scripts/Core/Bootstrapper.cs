@@ -11,7 +11,6 @@ namespace Core
         [Inject]
         private void Construct(Game game)
         {
-            Debug.Log("Const");
             _game = game;
         }
         // private void Awake()
@@ -21,7 +20,7 @@ namespace Core
 
         public void Start()
         {
-            UnityEngine.Debug.Log("Start");
+            _game.StartGame();
         }
     }
 }

@@ -1578,8 +1578,10 @@ MonoBehaviour:
   parentReference:
     TypeName: Core.LvlGeneratorInstaller
   autoRun: 1
-  autoInjectGameObjects: []
+  autoInjectGameObjects:
+  - {fileID: 1198108654}
   uiPreviewer: {fileID: 1972294822}
+  interactive: {fileID: 1198108660}
 --- !u!114 &1433072722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1595,7 +1597,9 @@ MonoBehaviour:
   parentReference:
     TypeName: Core.GameInstaller
   autoRun: 1
-  autoInjectGameObjects: []
+  autoInjectGameObjects:
+  - {fileID: 1962747665}
+  lvlGenerator: {fileID: 1962747666}
 --- !u!114 &1433072723
 MonoBehaviour:
   m_ObjectHideFlags: 0

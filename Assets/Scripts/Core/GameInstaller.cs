@@ -12,18 +12,18 @@ namespace Core
 
         protected override void Configure(IContainerBuilder builder)
         {
-            // Здесь мы регистрируем компоненты и их зависимости
-
-            // FromInstance аналогичен Zenject
             builder.RegisterInstance(movementComponent);
-
-            // AsSingle().NonLazy() в Zenject аналогично Singleton в VContainer
-            builder.Register<PlayerInput>(Lifetime.Singleton).AsImplementedInterfaces();
-            builder.Register<InputHandler>(Lifetime.Singleton).AsImplementedInterfaces();
-            builder.Register<Game>(Lifetime.Singleton).AsImplementedInterfaces();
-
-            // AsSingle() без NonLazy
+            
+            builder.Register<PlayerInput>(Lifetime.Transient).AsSelf();
+            builder.Register<InputHandler>(Lifetime.Transient).AsSelf();
+            builder.Register<Game>(Lifetime.Transient).AsSelf();
+            
             builder.RegisterComponentInHierarchy<Bootstrapper>();
+        }
+
+        protected override void OnDestroy()
+        {
+            
         }
     }
 }

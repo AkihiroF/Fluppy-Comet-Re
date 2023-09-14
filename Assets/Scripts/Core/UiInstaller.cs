@@ -9,11 +9,12 @@ namespace Core
     public class UiInstaller : LifetimeScope
     {
         [SerializeField] private UIPreviewer uiPreviewer;
+        [SerializeField] private PlayerInteractiveComponent interactive;
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterInstance(uiPreviewer);
-            builder.Register<ScoreDataBase>(Lifetime.Singleton).AsImplementedInterfaces();
-            builder.Register<PlayerInteractiveComponent>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<ScoreDataBase>(Lifetime.Transient).AsSelf();
+            builder.RegisterInstance(interactive);
         }
     }
 }

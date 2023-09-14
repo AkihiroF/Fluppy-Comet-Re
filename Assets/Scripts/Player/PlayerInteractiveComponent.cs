@@ -11,7 +11,13 @@ namespace Player
         [SerializeField] private LayerMask coinLayer;
         [SerializeField] private LayerMask deathLayer;
 
-        [Inject] private ScoreDataBase _scoreDataBase;
+        private ScoreDataBase _scoreDataBase;
+
+        [Inject]
+        private void Construct(ScoreDataBase scoreDataBase)
+        {
+            _scoreDataBase = scoreDataBase;
+        }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
