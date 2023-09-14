@@ -1,15 +1,16 @@
 using GeneratorLevel;
-using Zenject;
+using VContainer;
+using VContainer.Unity;
 
 namespace Core
 {
-    public class LvlGeneratorInstaller : MonoInstaller
+    public class LvlGeneratorInstaller : LifetimeScope
     {
-        public override void InstallBindings()
+        protected override void Configure(IContainerBuilder builder)
         {
-            Container.Bind<PoolPartsLevel>().AsSingle().NonLazy();
-            Container.Bind<PartCollector>().AsSingle();
-            Container.Bind<LvlGenerator>().AsSingle();
+            builder.Register<PoolPartsLevel>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<PartCollector>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<LvlGenerator>(Lifetime.Singleton).AsImplementedInterfaces();
         }
     }
 }

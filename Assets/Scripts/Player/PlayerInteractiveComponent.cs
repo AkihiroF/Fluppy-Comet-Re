@@ -2,7 +2,7 @@ using deVoid.Utils;
 using Events;
 using Services;
 using UnityEngine;
-using Zenject;
+using VContainer;
 
 namespace Player
 {

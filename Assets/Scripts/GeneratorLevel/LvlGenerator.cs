@@ -2,7 +2,7 @@ using deVoid.Utils;
 using Events;
 using GeneratorLevel.Parts;
 using UnityEngine;
-using Zenject;
+using VContainer;
 
 namespace GeneratorLevel
 {

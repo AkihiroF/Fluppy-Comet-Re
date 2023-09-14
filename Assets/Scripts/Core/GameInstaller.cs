@@ -1,20 +1,29 @@
 using Input;
 using Player;
 using UnityEngine;
-using Zenject;
+using VContainer;
+using VContainer.Unity;
 
 namespace Core
 {
-    public class GameInstaller : MonoInstaller
+    public class GameInstaller : LifetimeScope
     {
         [SerializeField] private PlayerMovementComponent movementComponent;
-        public override void InstallBindings()
+
+        protected override void Configure(IContainerBuilder builder)
         {
-            Container.Bind<PlayerMovementComponent>().FromInstance(movementComponent);
-            Container.Bind<PlayerInput>().AsSingle().NonLazy();
-            Container.Bind<InputHandler>().AsSingle().NonLazy();
-            Container.Bind<Game>().AsSingle().NonLazy();
-            Container.Bind<Bootstrapper>().AsSingle();
+            // Здесь мы регистрируем компоненты и их зависимости
+
+            // FromInstance аналогичен Zenject
+            builder.RegisterInstance(movementComponent);
+
+            // AsSingle().NonLazy() в Zenject аналогично Singleton в VContainer
+            builder.Register<PlayerInput>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<InputHandler>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<Game>(Lifetime.Singleton).AsImplementedInterfaces();
+
+            // AsSingle() без NonLazy
+            builder.RegisterComponentInHierarchy<Bootstrapper>();
         }
     }
 }

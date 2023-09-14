@@ -3,7 +3,7 @@ using Events;
 using GeneratorLevel.Parts;
 using Services;
 using UnityEngine;
-using Zenject;
+using VContainer;
 
 namespace GeneratorLevel
 {

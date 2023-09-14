@@ -1,18 +1,19 @@
 using Player;
 using UI;
 using UnityEngine;
-using Zenject;
+using VContainer;
+using VContainer.Unity;
 
 namespace Core
 {
-    public class UiInstaller : MonoInstaller
+    public class UiInstaller : LifetimeScope
     {
         [SerializeField] private UIPreviewer uiPreviewer;
-        public override void InstallBindings()
+        protected override void Configure(IContainerBuilder builder)
         {
-            Container.Bind<UIPreviewer>().FromInstance(uiPreviewer);
-            Container.Bind<ScoreDataBase>().AsSingle().NonLazy();
-            Container.Bind<PlayerInteractiveComponent>().AsSingle();
+            builder.RegisterInstance(uiPreviewer);
+            builder.Register<ScoreDataBase>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<PlayerInteractiveComponent>(Lifetime.Singleton).AsImplementedInterfaces();
         }
     }
 }

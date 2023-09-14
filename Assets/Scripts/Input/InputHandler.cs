@@ -1,6 +1,7 @@
 using System;
 using Player;
 using UnityEngine.InputSystem;
+using VContainer;
 
 namespace Input
 {
@@ -8,6 +9,7 @@ namespace Input
     {
         private PlayerMovementComponent _movementComponent;
 
+        [Inject]
         public InputHandler(PlayerMovementComponent movementComponent)
         {
             _movementComponent = movementComponent;

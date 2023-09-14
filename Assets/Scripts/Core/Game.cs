@@ -5,7 +5,7 @@ using Input;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using Zenject;
+using VContainer;
 
 namespace Core
 {
