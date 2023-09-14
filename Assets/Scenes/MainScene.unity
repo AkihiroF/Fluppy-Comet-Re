@@ -1539,8 +1539,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1433072720}
   - component: {fileID: 1433072723}
-  - component: {fileID: 1433072722}
-  - component: {fileID: 1433072721}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -1563,43 +1561,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1433072721
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1433072716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa28a5b2ba354200a133d0137b7b5e1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentReference:
-    TypeName: Core.LvlGeneratorInstaller
-  autoRun: 1
-  autoInjectGameObjects:
-  - {fileID: 1198108654}
-  uiPreviewer: {fileID: 1972294822}
-  interactive: {fileID: 1198108660}
---- !u!114 &1433072722
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1433072716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a68846d45c04194be639396f3e1eba1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentReference:
-    TypeName: Core.GameInstaller
-  autoRun: 1
-  autoInjectGameObjects:
-  - {fileID: 1962747665}
-  lvlGenerator: {fileID: 1962747666}
 --- !u!114 &1433072723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1617,7 +1578,13 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects:
   - {fileID: 11588824}
+  - {fileID: 1198108654}
+  - {fileID: 1962747665}
+  - {fileID: 1972294821}
   movementComponent: {fileID: 1198108655}
+  uiPreviewer: {fileID: 1972294822}
+  interactive: {fileID: 1198108660}
+  lvlGenerator: {fileID: 1962747666}
 --- !u!1 &1556558228
 GameObject:
   m_ObjectHideFlags: 0

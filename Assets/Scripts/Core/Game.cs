@@ -1,92 +1,50 @@
+using System;
+using System.Collections.Generic;
+using Core.StatesGame;
 using deVoid.Utils;
-using DG.Tweening;
 using Events;
-using Input;
-using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 using VContainer;
 
 namespace Core
 {
     public class Game
     {
-        private readonly PlayerInput _input;
-        private readonly InputHandler _inputHandler;
-        private bool _isGameStarted;
+        private Dictionary<Type, IStateGame> _states;
 
         [Inject]
-        public Game(PlayerInput input, InputHandler inputHandler)
+        public Game(IEnumerable<IStateGame> stateGames)
         {
-            _input = input;
-            _inputHandler = inputHandler;
-            InitializeGame();
+            _states = new Dictionary<Type, IStateGame>();
+            foreach (var state in stateGames)
+            {
+                _states.Add(state.GetType(), state);
+            }
         }
 
-        private void InitializeGame()
+        private void SwitchStateGame(Type state)
         {
-            PauseGame();
-            _isGameStarted = false;
-        }
-
-        private void PauseGame()
-        {
-            Time.timeScale = 0;
-        }
-
-        private void ResumeGame()
-        {
-            Time.timeScale = 1;
-        }
-
-        private void BindInputActions()
-        {
-            _input.Player.Jump.performed += _inputHandler.InputJump;
-            _input.Player.Jump.performed += StartGameOnFirstJump;
-        }
-
-        private void EnableInput()
-        {
-            _input.Player.Enable();
-        }
-
-        private void StartGameOnFirstJump(InputAction.CallbackContext context)
-        {
-            if (_isGameStarted)
-                return;
-
-            _isGameStarted = true;
-            ResumeGame();
-            Signals.Get<OnStartGame>().Dispatch();
+            if (_states.ContainsKey(state))
+            {
+                if(state == typeof(DieState))
+                    UnsubscribeFromEvents();
+                _states[state].Enter();
+            }
         }
 
         private void SubscribeToEvents()
         {
-            Signals.Get<OnDie>().AddListener(OnPlayerDie);
+            Signals.Get<OnSwitchStateGame>().AddListener(SwitchStateGame);
         }
 
         private void UnsubscribeFromEvents()
         {
-            Signals.Get<OnDie>().RemoveListener(OnPlayerDie);
-        }
-
-        private void OnPlayerDie()
-        {
-            DOTween.KillAll();
-            UnsubscribeFromEvents();
-            ReloadCurrentScene();
-        }
-
-        private void ReloadCurrentScene()
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Signals.Get<OnSwitchStateGame>().RemoveListener(SwitchStateGame);
         }
 
         public void StartGame()
         {
-            BindInputActions();
-            EnableInput();
             SubscribeToEvents();
+            SwitchStateGame(typeof(InitialiseState));
         }
     }
 }

@@ -7,10 +7,10 @@ namespace Input
 {
     public class InputHandler
     {
-        private PlayerMovementComponent _movementComponent;
+        private IMovablePlayer _movementComponent;
 
         [Inject]
-        public InputHandler(PlayerMovementComponent movementComponent)
+        public InputHandler(IMovablePlayer movementComponent)
         {
             _movementComponent = movementComponent;
         }

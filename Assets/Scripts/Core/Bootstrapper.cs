@@ -1,3 +1,6 @@
+using Core.StatesGame;
+using deVoid.Utils;
+using Events;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -13,10 +16,6 @@ namespace Core
         {
             _game = game;
         }
-        // private void Awake()
-        // {
-        //     _game.StartGame();
-        // }
 
         public void Start()
         {

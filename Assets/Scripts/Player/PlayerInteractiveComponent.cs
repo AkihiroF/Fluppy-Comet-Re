@@ -1,3 +1,4 @@
+using Core.StatesGame;
 using deVoid.Utils;
 using Events;
 using Services;
@@ -59,7 +60,7 @@ namespace Player
 
         private void TriggerDeath()
         {
-            Signals.Get<OnDie>().Dispatch();
+            Signals.Get<OnSwitchStateGame>().Dispatch(typeof(DieState));
         }
     }
 }
