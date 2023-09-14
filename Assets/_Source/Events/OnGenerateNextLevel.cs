@@ -1,6 +1,6 @@
-using deVoid.Utils;
+using _Source.Services;
 
-namespace Events
+namespace _Source.Events
 {
     public class OnGenerateNextLevel : ASignal
     {

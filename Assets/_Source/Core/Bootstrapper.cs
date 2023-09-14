@@ -1,25 +1,22 @@
-using Core.StatesGame;
-using deVoid.Utils;
-using Events;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace Core
+namespace _Source.Core
 {
     public class Bootstrapper : MonoBehaviour, IStartable
     {
-        private Game _game;
+        private StateMachine _stateMachine;
 
         [Inject]
-        private void Construct(Game game)
+        private void Construct(StateMachine stateMachine)
         {
-            _game = game;
+            _stateMachine = stateMachine;
         }
 
         public void Start()
         {
-            _game.StartGame();
+            _stateMachine.StartGame();
         }
     }
 }

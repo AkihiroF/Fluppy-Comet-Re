@@ -1,7 +1,7 @@
 using DG.Tweening;
 using UnityEngine.SceneManagement;
 
-namespace Core.StatesGame
+namespace _Source.Core.StatesGame
 {
     public class DieState : IStateGame
     {

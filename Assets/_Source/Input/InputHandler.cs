@@ -1,9 +1,9 @@
 using System;
-using Player;
+using _Source.Player;
 using UnityEngine.InputSystem;
 using VContainer;
 
-namespace Input
+namespace _Source.Input
 {
     public class InputHandler
     {

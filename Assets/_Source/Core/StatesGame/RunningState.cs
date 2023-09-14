@@ -2,7 +2,7 @@ using UI;
 using UnityEngine;
 using VContainer;
 
-namespace Core.StatesGame
+namespace _Source.Core.StatesGame
 {
     public class RunningState : IStateGame
     {

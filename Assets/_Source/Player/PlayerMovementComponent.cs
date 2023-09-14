@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Player
+namespace _Source.Player
 {
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerMovementComponent : MonoBehaviour, IMovablePlayer

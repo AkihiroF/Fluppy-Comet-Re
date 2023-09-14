@@ -1,11 +1,10 @@
-using Core.StatesGame;
-using deVoid.Utils;
-using Events;
-using Services;
+using _Source.Core.StatesGame;
+using _Source.Events;
+using _Source.Services;
 using UnityEngine;
 using VContainer;
 
-namespace Player
+namespace _Source.Player
 {
     public class PlayerInteractiveComponent : MonoBehaviour
     {

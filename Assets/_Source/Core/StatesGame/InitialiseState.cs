@@ -1,11 +1,11 @@
-using deVoid.Utils;
-using Events;
-using Input;
+using _Source.Events;
+using _Source.Input;
+using _Source.Services;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using VContainer;
 
-namespace Core.StatesGame
+namespace _Source.Core.StatesGame
 {
     public class InitialiseState : IStateGame
     {

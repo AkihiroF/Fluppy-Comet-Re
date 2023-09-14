@@ -1,4 +1,4 @@
-namespace Core.StatesGame
+namespace _Source.Core.StatesGame
 {
     public interface IStateGame
     {

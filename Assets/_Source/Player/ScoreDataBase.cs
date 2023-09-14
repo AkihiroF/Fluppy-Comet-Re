@@ -1,7 +1,7 @@
 using UI;
 using Zenject;
 
-namespace Player
+namespace _Source.Player
 {
     public class ScoreDataBase
     {

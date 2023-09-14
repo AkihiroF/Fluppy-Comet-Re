@@ -1,4 +1,4 @@
-namespace Player
+namespace _Source.Player
 {
     public interface IMovablePlayer
     {

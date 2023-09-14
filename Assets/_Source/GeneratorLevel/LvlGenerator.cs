@@ -1,10 +1,10 @@
-using deVoid.Utils;
-using Events;
-using GeneratorLevel.Parts;
+using _Source.Events;
+using _Source.GeneratorLevel.Parts;
+using _Source.Services;
 using UnityEngine;
 using VContainer;
 
-namespace GeneratorLevel
+namespace _Source.GeneratorLevel
 {
     public class LvlGenerator : MonoBehaviour
     {

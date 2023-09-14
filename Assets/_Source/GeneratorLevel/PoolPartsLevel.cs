@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using GeneratorLevel.Parts;
+using _Source.GeneratorLevel.Parts;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
-namespace GeneratorLevel
+namespace _Source.GeneratorLevel
 {
     public class PoolPartsLevel
     {

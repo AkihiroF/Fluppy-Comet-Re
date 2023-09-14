@@ -3,7 +3,7 @@ using DG.Tweening;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace GeneratorLevel.Parts
+namespace _Source.GeneratorLevel.Parts
 {
     public class BasePartLevel : APartLevel
     {

@@ -1,7 +1,7 @@
 using System;
-using deVoid.Utils;
+using _Source.Services;
 
-namespace Events
+namespace _Source.Events
 {
     public class OnSwitchStateGame : ASignal<Type>
     {

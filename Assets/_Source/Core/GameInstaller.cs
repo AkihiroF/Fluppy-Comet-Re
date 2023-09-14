@@ -1,13 +1,13 @@
-using Core.StatesGame;
-using GeneratorLevel;
-using Input;
-using Player;
+using _Source.Core.StatesGame;
+using _Source.GeneratorLevel;
+using _Source.Input;
+using _Source.Player;
 using UI;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace Core
+namespace _Source.Core
 {
     public class GameInstaller : LifetimeScope
     {
@@ -31,7 +31,7 @@ namespace Core
             builder.Register<IStateGame, RunningState>(Lifetime.Singleton);
             builder.Register<IStateGame, DieState>(Lifetime.Singleton);
             
-            builder.Register<Game>(Lifetime.Singleton).AsSelf();
+            builder.Register<StateMachine>(Lifetime.Singleton).AsSelf();
             
             builder.Register<PoolPartsLevel>(Lifetime.Singleton).AsSelf();
             builder.Register<PartCollector>(Lifetime.Singleton).AsSelf();

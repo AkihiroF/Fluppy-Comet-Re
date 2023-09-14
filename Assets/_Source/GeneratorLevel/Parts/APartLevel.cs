@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GeneratorLevel.Parts
+namespace _Source.GeneratorLevel.Parts
 {
     public abstract class APartLevel : MonoBehaviour
     {

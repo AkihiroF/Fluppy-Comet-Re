@@ -1,18 +1,18 @@
 using System;
 using System.Collections.Generic;
-using Core.StatesGame;
-using deVoid.Utils;
-using Events;
+using _Source.Core.StatesGame;
+using _Source.Events;
+using _Source.Services;
 using VContainer;
 
-namespace Core
+namespace _Source.Core
 {
-    public class Game
+    public class StateMachine
     {
         private Dictionary<Type, IStateGame> _states;
 
         [Inject]
-        public Game(IEnumerable<IStateGame> stateGames)
+        public StateMachine(IEnumerable<IStateGame> stateGames)
         {
             _states = new Dictionary<Type, IStateGame>();
             foreach (var state in stateGames)
